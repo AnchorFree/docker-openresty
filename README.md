@@ -12,8 +12,11 @@ The resulting image will also include the following luarocks modules:
 * lsqlite3
 * inspect
 
-Note that the image is using runit-init instead of traditional 
-docker approach with shell scripts as entrypoints.
+Note that the image is using runit-init by default, instead of traditional 
+docker approach with shell scripts as entrypoints. If you want
+to stick to the traditional way, just use Dockerfile.traditional
+for the build -- it changes entrypoint from runit to openresty
+binary and also makes nginx log to stdout and stderr.
 
 #### Usage
 
