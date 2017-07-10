@@ -12,9 +12,9 @@ ln -s /usr/openresty/luajit/bin/luajit-2.1.0-beta2 /bin/lua
 ln -s /usr/openresty/luajit/bin/luarocks-5.1 /bin/luarocks
  
 luarocks install pgmoon
-luarocks install lua-resty-http
-luarocks install inspect
 luarocks install lsqlite3
+luarocks install web
+luarocks install inspect
 
 apk del luarocks 
 apk del unzip gcc musl-dev
