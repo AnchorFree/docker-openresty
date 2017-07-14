@@ -14,6 +14,7 @@ ln -s /usr/openresty/luajit/bin/luarocks-5.1 /bin/luarocks
 luarocks install pgmoon
 luarocks install lsqlite3
 luarocks install web
+luarocks install lua-resty-exec
 luarocks install inspect
 
 apk del luarocks 
