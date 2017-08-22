@@ -4,8 +4,7 @@ sleep 5
 
 builderUser=robopan
 
-apk update && apk upgrade
-apk add alpine-sdk pcre-dev perl openssl-dev zlib-dev
+apk add --no-cache alpine-sdk pcre-dev perl openssl-dev zlib-dev unzip
 
 adduser -D -s /bin/sh ${builderUser}
 addgroup ${builderUser} abuild
