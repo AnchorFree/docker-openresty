@@ -13,9 +13,13 @@ ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/ngin
 luarocks install inspect
 luarocks install lsqlite3
 luarocks install pgmoon
+luarocks install lua-resty-http
 luarocks install web 
-luarocks install lua-resty-exec
 luarocks install docker
+
+if [[ ! -z ${1} ]] && [[ "${1}" == "cli" ]]; then
+    apk add --no-cache perl
+fi
 
 apk del luarocks unzip gcc musl-dev
 rm /root/*.apk
