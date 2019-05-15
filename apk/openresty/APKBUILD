@@ -2,7 +2,7 @@
 # Contributor: Vladimir Zorin <vladimir@deviant.guru>
 
 pkgname=openresty
-pkgver=1.11.2.5
+pkgver=1.13.6.2
 pkgrel=1
 pkgdesc="Nginx with Lua module, bells & whistles"
 url="http://openresty.org"
@@ -14,7 +14,6 @@ install="$pkgname.pre-install"
 depends="!nginx !nginx-lua"
 makedepends="pcre-dev perl openssl-dev zlib-dev"
 source="https://openresty.org/download/$pkgname-$pkgver.tar.gz
-	$pkgname.runit.run
 	$pkgname.nginx.conf
 	$pkgname.default.conf
 	$pkgname.mime.types
@@ -61,7 +60,6 @@ package() {
 	cd "$_builddir"
 	make DESTDIR="$pkgdir" install || return 1
 
-	install -Dm755 "$srcdir"/$pkgname.runit.run "$pkgdir"/etc/sv/nginx/run
 	install -Dm644 "$srcdir"/$pkgname.mime.types "$pkgdir"/etc/nginx/mime.types
 	install -Dm644 "$srcdir"/$pkgname.nginx.conf "$pkgdir"/etc/nginx/nginx.conf
 	install -Dm644 "$srcdir"/$pkgname.default.conf "$pkgdir"/etc/nginx/vhosts/default.conf

@@ -1,16 +1,7 @@
 #!/bin/sh
 
-sleep 5
-
-builderUser=robopan
-
 apk add --no-cache alpine-sdk pcre-dev perl openssl-dev zlib-dev unzip
-
-adduser -D -s /bin/sh ${builderUser}
-addgroup ${builderUser} abuild
- 
-echo "${builderUser} ALL = NOPASSWD: ALL" > /etc/sudoers.d/${builderUser}
- 
+addgroup root abuild
 
 cat <<EOF > /etc/abuild.conf
 CHOST=x86_64-alpine-linux-musl
@@ -24,15 +15,11 @@ export MAKEFLAGS=-j\$JOBS
 USE_COLORS=1
 SRCDEST=/var/cache/distfiles
 
-REPODEST=/home/${builderUser}/packages/
-PACKAGER="Vladimir Zorin <vladimir@deviant.guru>"
-PACKAGER_PRIVKEY=/home/${builderUser}/.abuild/vladimir@deviant.guru.rsa
+REPODEST=/root/built/
+PACKAGER="Vladimir Zorin <v.zorin@anchorfree.com>"
 
 CLEANUP="srcdir pkgdir deps"
 ERROR_CLEANUP="deps"
 EOF
 
-mkdir /home/${builderUser}/.abuild
-mkdir /home/${builderUser}/.ssh
-mv /root/*.rsa /home/${builderUser}/.abuild/
-
+abuild-keygen -a -n -i -q
